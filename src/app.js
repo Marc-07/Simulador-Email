@@ -1,10 +1,18 @@
 document.addEventListener("DOMContentLoaded", function() {
 
+    //Se crea Objeto que mantiene los valores de los elementos
+    const email = {
+        nombre: "",
+        email: "",
+        asunto: "",
+        mensaje: ""
+    };
+
     //Seleccionar los elementos de la interfez
+    const inputNombre = document.querySelector("#nombre");
     const inputEmail = document.querySelector("#email");
     const inputAsunto = document.querySelector("#asunto");
     const inputMensaje = document.querySelector("#mensaje");
-    const inputNombre = document.querySelector("#nombre");
     const formulario = document.querySelector("#formulario");
 
     //Asignar eventos
@@ -26,6 +34,13 @@ document.addEventListener("DOMContentLoaded", function() {
        };
        
        limpiarAlerta( e.target.parentElement);
+
+       //Asignar los Valores
+       email[e.target.name] = e.target.value.trim().toLowerCase();
+
+       //Comprobar el objeto Email
+       comprobarEmail ();
+
     };
 
     function mostrarAlerta (mensaje, referencia){
@@ -52,5 +67,9 @@ document.addEventListener("DOMContentLoaded", function() {
         const regex =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/  //Código que busca patrón en una cadena de texto
         const resultado = regex.test(email);
         return resultado;
+    }
+
+    function comprobarEmail (){
+        console.log(Object.values(email).includes(""));
     }
 });
