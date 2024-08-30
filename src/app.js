@@ -29,14 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
     btnReset.addEventListener("click", function (e){
         e.preventDefault();
 
-        //Reiniciar el objeto
-        email.nombre = "";
-        email.email = "";
-        email.asunto = "";
-        email.mensaje = "";
-
-        formulario.reset();
-        comprobarEmail();
+        resetearFormulario();
 
     });
 
@@ -50,15 +43,29 @@ document.addEventListener("DOMContentLoaded", function() {
             spinner.classList.remove("flex");
             spinner.classList.add("hidden");  
             
-            //Reiniciar el objeto
-            email.nombre = "";
-            email.email = "";
-            email.asunto = "";
-            email.mensaje = "";
+            resetearFormulario();
 
-            formulario.reset();
-            comprobarEmail();
-            
+            //Crear alerta de exito de envio
+            const envioExitoso = document.createElement("P");
+            envioExitoso.classList.add(
+              "bg-green-600",
+              "text-white",
+              "p-2",
+              "text-center",
+              "rounded-lg",
+              "mt-10",
+              "font-bold",
+              "text-sm",
+              "uppercase"
+            );
+
+            envioExitoso.textContent = "El email se envió exitosamente"
+            formulario.appendChild(envioExitoso);
+
+            setTimeout(() => {
+                envioExitoso.remove();
+            }, 3000);
+
         }, 3000);
     }
 
@@ -125,4 +132,16 @@ document.addEventListener("DOMContentLoaded", function() {
         btnSubmit.classList.remove("opacity-50");
         btnSubmit.disabled = false;
     };
+
+    function resetearFormulario(){
+        
+        //Reiniciar el objeto
+        email.nombre = "";
+        email.email = "";
+        email.asunto = "";
+        email.mensaje = "";
+
+        formulario.reset();
+        comprobarEmail();
+    }
 });
